@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@repo/design-system": ["packages/design-system/src"],
+      "@repo/types": ["packages/types/src"],
+      "@repo/ui": ["packages/ui/src"],
+      "@repo/auth": ["packages/auth/src"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
