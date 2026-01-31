@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "identifier": "app.yula.desktop",
   "build": {
-    "beforeDevCommand": "bun run --cwd ../web dev",
+    "beforeDevCommand": "bun run --cwd ../web dev -- -p 3000",
     "devUrl": "http://localhost:3000",
     "frontendDist": "http://localhost:3000"
   },
