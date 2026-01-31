@@ -23,7 +23,7 @@ final class AuthService {
     }
 
     func login(email: String, password: String) async throws {
-        let response: APIResponse<AuthResponse> = try await APIClient.shared.request(
+        let response: APIResponse<AuthResponse> = try await APIClient.request(
             path: "/api/auth/login",
             method: "POST",
             body: LoginRequest(email: email, password: password)
@@ -37,7 +37,7 @@ final class AuthService {
     }
 
     func signup(email: String, password: String, name: String) async throws {
-        let response: APIResponse<AuthResponse> = try await APIClient.shared.request(
+        let response: APIResponse<AuthResponse> = try await APIClient.request(
             path: "/api/auth/signup",
             method: "POST",
             body: SignupRequest(email: email, password: password, name: name)
@@ -58,7 +58,7 @@ final class AuthService {
 
     func fetchCurrentUser() async {
         do {
-            let response: APIResponse<User> = try await APIClient.shared.request(path: "/api/auth/me")
+            let response: APIResponse<User> = try await APIClient.request(path: "/api/auth/me")
             currentUser = response.data
         } catch {
             logout()

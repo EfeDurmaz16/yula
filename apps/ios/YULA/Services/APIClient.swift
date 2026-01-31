@@ -1,17 +1,15 @@
 import Foundation
 
-actor APIClient {
-    static let shared = APIClient()
-
-    private var baseURL: String {
+enum APIClient {
+    private static var baseURL: String {
         AppConfig.apiBaseURL
     }
 
-    private var token: String? {
+    private static var token: String? {
         KeychainHelper.readString(for: "auth_token")
     }
 
-    func request<T: Codable>(
+    static func request<T: Codable>(
         path: String,
         method: String = "GET",
         body: (any Encodable)? = nil
@@ -36,7 +34,7 @@ actor APIClient {
         return try JSONDecoder().decode(APIResponse<T>.self, from: data)
     }
 
-    func streamChat(conversationId: String, message: String) -> AsyncThrowingStream<String, Error> {
+    static func streamChat(conversationId: String, message: String) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             Task {
                 guard let url = URL(string: "\(baseURL)/api/chat") else {
@@ -47,7 +45,7 @@ actor APIClient {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                if let token = self.token {
+                if let token {
                     request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                 }
 

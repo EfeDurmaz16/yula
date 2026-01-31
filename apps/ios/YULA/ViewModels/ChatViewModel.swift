@@ -26,7 +26,7 @@ final class ChatViewModel {
 
         Task {
             do {
-                let stream = APIClient.shared.streamChat(
+                let stream = APIClient.streamChat(
                     conversationId: conversationId,
                     message: text
                 )
