@@ -1,6 +1,6 @@
 import Foundation
 
-enum Environment {
+enum AppConfig {
     static var apiBaseURL: String {
         #if DEBUG
         return "http://localhost:3001"

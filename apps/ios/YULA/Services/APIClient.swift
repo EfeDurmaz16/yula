@@ -4,7 +4,7 @@ actor APIClient {
     static let shared = APIClient()
 
     private var baseURL: String {
-        Environment.apiBaseURL
+        AppConfig.apiBaseURL
     }
 
     private var token: String? {
