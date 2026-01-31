@@ -51,14 +51,14 @@ Your mission: Build a complete, production-ready YULA MVP. Do not stop until don
 
 ### Step 1.1: Initialize Monorepo
 
-```bash
+
 # Create project structure
 mkdir -p apps/web apps/api apps/mobile
 mkdir -p packages/design-system packages/types packages/ui packages/auth packages/mcp-servers
-```
+
 
 Create `/package.json`:
-```json
+
 {
   "name": "yula",
   "private": true,
@@ -81,12 +81,12 @@ Create `/package.json`:
   },
   "packageManager": "bun@1.1.0"
 }
-```
+
 
 ### Step 1.2: Create Turborepo Config
 
 Create `/turbo.json`:
-```json
+
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
@@ -107,12 +107,12 @@ Create `/turbo.json`:
     }
   }
 }
-```
+
 
 ### Step 1.3: Create Biome Config
 
 Create `/biome.json`:
-```json
+
 {
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
   "organizeImports": {
@@ -137,12 +137,12 @@ Create `/biome.json`:
     }
   }
 }
-```
+
 
 ### Step 1.4: Create TypeScript Config
 
 Create `/tsconfig.json`:
-```json
+
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -168,12 +168,12 @@ Create `/tsconfig.json`:
   },
   "exclude": ["node_modules"]
 }
-```
+
 
 ### Step 1.5: Create .gitignore
 
 Create `/.gitignore`:
-```
+
 # Dependencies
 node_modules
 .pnp
@@ -211,14 +211,14 @@ npm-debug.log*
 # Misc
 .cache
 *.tsbuildinfo
-```
+
 
 ### Step 1.6: Verify Infrastructure
 
-```bash
+
 bun install
 bun run lint
-```
+
 
 **Checkpoint**: If no errors, output `INFRASTRUCTURE_DONE`
 
@@ -244,7 +244,7 @@ Extract:
 ### Step 2.2: Create Design System Package
 
 Create `/packages/design-system/package.json`:
-```json
+
 {
   "name": "@repo/design-system",
   "version": "0.0.1",
@@ -259,12 +259,12 @@ Create `/packages/design-system/package.json`:
     "typescript": "^5.7.0"
   }
 }
-```
+
 
 ### Step 2.3: Create Color System
 
 Create `/packages/design-system/src/colors.ts`:
-```typescript
+
 /**
  * YULA Design System - Color Palette
  * Monochrom palette with 12-step hierarchy
@@ -323,12 +323,12 @@ export const semanticColors = {
 
 export type ColorScale = typeof colors
 export type SemanticColors = typeof semanticColors
-```
+
 
 ### Step 2.4: Create Typography System
 
 Create `/packages/design-system/src/typography.ts`:
-```typescript
+
 /**
  * YULA Design System - Typography
  * Using Geist Sans and Geist Mono
@@ -414,12 +414,12 @@ export const typography = {
     fontFamily: 'var(--font-geist-mono)',
   },
 } as const
-```
+
 
 ### Step 2.5: Create Spacing System
 
 Create `/packages/design-system/src/spacing.ts`:
-```typescript
+
 /**
  * YULA Design System - Spacing
  * Generous spacing for premium feel
@@ -472,12 +472,12 @@ export const semanticSpacing = {
   '2xl': spacing[12], // 48px
   '3xl': spacing[16], // 64px
 } as const
-```
+
 
 ### Step 2.6: Create Shadows
 
 Create `/packages/design-system/src/shadows.ts`:
-```typescript
+
 /**
  * YULA Design System - Shadows
  * Subtle shadows for depth
@@ -493,12 +493,12 @@ export const shadows = {
   '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
   inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
 } as const
-```
+
 
 ### Step 2.7: Create Border Radius
 
 Create `/packages/design-system/src/radius.ts`:
-```typescript
+
 /**
  * YULA Design System - Border Radius
  */
@@ -513,12 +513,12 @@ export const borderRadius = {
   '3xl': '1.5rem',
   full: '9999px',
 } as const
-```
+
 
 ### Step 2.8: Create Animations
 
 Create `/packages/design-system/src/animations.ts`:
-```typescript
+
 /**
  * YULA Design System - Animations
  */
@@ -564,24 +564,24 @@ export const keyframes = {
     to: { transform: 'rotate(360deg)' },
   },
 } as const
-```
+
 
 ### Step 2.9: Create Main Export
 
 Create `/packages/design-system/src/index.ts`:
-```typescript
+
 export * from './colors'
 export * from './typography'
 export * from './spacing'
 export * from './shadows'
 export * from './radius'
 export * from './animations'
-```
+
 
 ### Step 2.10: Create Tailwind Config
 
 Create `/packages/design-system/tailwind.config.ts`:
-```typescript
+
 import type { Config } from 'tailwindcss'
 import { colors, semanticColors } from './src/colors'
 import { fontFamily, fontSize, fontWeight, letterSpacing } from './src/typography'
@@ -621,7 +621,7 @@ export const designSystemPreset: Partial<Config> = {
 }
 
 export default designSystemPreset
-```
+
 
 **Checkpoint**: Verify all design system files created. Output `DESIGN_SYSTEM_DONE`
 
@@ -633,7 +633,7 @@ export default designSystemPreset
 ### Step 3.1: Create Types Package
 
 Create `/packages/types/package.json`:
-```json
+
 {
   "name": "@repo/types",
   "version": "0.0.1",
@@ -650,12 +650,12 @@ Create `/packages/types/package.json`:
     "typescript": "^5.7.0"
   }
 }
-```
+
 
 ### Step 3.2: Create User Types
 
 Create `/packages/types/src/user.ts`:
-```typescript
+
 import { z } from 'zod'
 
 export const TierSchema = z.enum(['free', 'pro', 'max', 'ultra'])
@@ -685,12 +685,12 @@ export const CreateUserSchema = UserSchema.omit({
 })
 
 export type CreateUser = z.infer<typeof CreateUserSchema>
-```
+
 
 ### Step 3.3: Create Message Types
 
 Create `/packages/types/src/message.ts`:
-```typescript
+
 import { z } from 'zod'
 
 export const MessageRoleSchema = z.enum(['user', 'assistant', 'system'])
@@ -714,12 +714,12 @@ export const CreateMessageSchema = MessageSchema.omit({
 })
 
 export type CreateMessage = z.infer<typeof CreateMessageSchema>
-```
+
 
 ### Step 3.4: Create Conversation Types
 
 Create `/packages/types/src/conversation.ts`:
-```typescript
+
 import { z } from 'zod'
 import { MessageSchema } from './message'
 
@@ -747,12 +747,12 @@ export const CreateConversationSchema = z.object({
 })
 
 export type CreateConversation = z.infer<typeof CreateConversationSchema>
-```
+
 
 ### Step 3.5: Create Memory Types
 
 Create `/packages/types/src/memory.ts`:
-```typescript
+
 import { z } from 'zod'
 
 export const MemorySourceSchema = z.enum(['import', 'conversation', 'proactive', 'tool'])
@@ -785,12 +785,12 @@ export const MemorySearchSchema = z.object({
 })
 
 export type MemorySearch = z.infer<typeof MemorySearchSchema>
-```
+
 
 ### Step 3.6: Create Tool Types
 
 Create `/packages/types/src/tool.ts`:
-```typescript
+
 import { z } from 'zod'
 
 export const ToolSchema = z.object({
@@ -815,12 +815,12 @@ export const CreateToolSchema = z.object({
 })
 
 export type CreateTool = z.infer<typeof CreateToolSchema>
-```
+
 
 ### Step 3.7: Create Pricing Constants (LOCKED - DO NOT MODIFY)
 
 Create `/packages/types/src/pricing.ts`:
-```typescript
+
 /**
  * YULA Pricing Tiers
  *
@@ -904,12 +904,12 @@ export const PRICING = {
 } as const satisfies Record<string, PricingTier>
 
 export type PricingTierId = keyof typeof PRICING
-```
+
 
 ### Step 3.8: Create Main Types Export
 
 Create `/packages/types/src/index.ts`:
-```typescript
+
 // User types
 export * from './user'
 
@@ -964,12 +964,12 @@ export interface SignupCredentials {
   password: string
   name: string
 }
-```
+
 
 ### Step 3.9: Create Auth Package
 
 Create `/packages/auth/package.json`:
-```json
+
 {
   "name": "@repo/auth",
   "version": "0.0.1",
@@ -987,12 +987,12 @@ Create `/packages/auth/package.json`:
     "typescript": "^5.7.0"
   }
 }
-```
+
 
 ### Step 3.10: Create Auth Config
 
 Create `/packages/auth/src/config.ts`:
-```typescript
+
 import { betterAuth } from 'better-auth'
 import type { User } from '@repo/types'
 
@@ -1038,12 +1038,12 @@ export const auth = betterAuth({
 })
 
 export type Auth = typeof auth
-```
+
 
 Create `/packages/auth/src/index.ts`:
-```typescript
+
 export * from './config'
-```
+
 
 **Checkpoint**: Verify all type files created. Run TypeScript check. Output `TYPES_AUTH_DONE`
 
@@ -1055,7 +1055,7 @@ export * from './config'
 ### Step 4.1: Create UI Package
 
 Create `/packages/ui/package.json`:
-```json
+
 {
   "name": "@repo/ui",
   "version": "0.0.1",
@@ -1087,24 +1087,24 @@ Create `/packages/ui/package.json`:
     "typescript": "^5.7.0"
   }
 }
-```
+
 
 ### Step 4.2: Create Utility Functions
 
 Create `/packages/ui/src/utils/cn.ts`:
-```typescript
+
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-```
+
 
 ### Step 4.3: Create Button Component
 
 Create `/packages/ui/src/components/Button.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1181,12 +1181,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button'
 
 export { Button, buttonVariants }
-```
+
 
 ### Step 4.4: Create Input Component
 
 Create `/packages/ui/src/components/Input.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1224,12 +1224,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = 'Input'
 
 export { Input }
-```
+
 
 ### Step 4.5: Create Textarea Component
 
 Create `/packages/ui/src/components/Textarea.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1266,12 +1266,12 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = 'Textarea'
 
 export { Textarea }
-```
+
 
 ### Step 4.6: Create Card Component
 
 Create `/packages/ui/src/components/Card.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1349,12 +1349,12 @@ const CardFooter = React.forwardRef<
 CardFooter.displayName = 'CardFooter'
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
-```
+
 
 ### Step 4.7: Create Modal Component
 
 Create `/packages/ui/src/components/Modal.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1479,12 +1479,12 @@ export {
   ModalTitle,
   ModalDescription,
 }
-```
+
 
 ### Step 4.8: Create Context Menu Component (CORE)
 
 Create `/packages/ui/src/components/ContextMenu.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1671,12 +1671,12 @@ export function ContextMenuContent({
 }
 
 export type { ContextMenuItemProps }
-```
+
 
 ### Step 4.9: Create Floating Dock Component (CORE)
 
 Create `/packages/ui/src/components/FloatingDock.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -1968,12 +1968,12 @@ export function useFloatingDock() {
 
   return { commands, addCommand, removeCommand, clearCommands }
 }
-```
+
 
 ### Step 4.10: Create Toast Component
 
 Create `/packages/ui/src/components/Toast.tsx`:
-```typescript
+
 'use client'
 
 import * as React from 'react'
@@ -2089,12 +2089,12 @@ export function useToast() {
   }
   return context
 }
-```
+
 
 ### Step 4.11: Create Main UI Export
 
 Create `/packages/ui/src/index.ts`:
-```typescript
+
 // Utils
 export * from './utils/cn'
 
@@ -2107,7 +2107,7 @@ export * from './components/Modal'
 export * from './components/ContextMenu'
 export * from './components/FloatingDock'
 export * from './components/Toast'
-```
+
 
 **Checkpoint**: Verify all UI components created. Run lint. Output `UI_COMPONENTS_DONE`
 
@@ -2119,7 +2119,7 @@ export * from './components/Toast'
 ### Step 5.1: Create Backend Package
 
 Create `/apps/api/package.json`:
-```json
+
 {
   "name": "yula-api",
   "version": "0.0.1",
@@ -2147,12 +2147,12 @@ Create `/apps/api/package.json`:
     "typescript": "^5.7.0"
   }
 }
-```
+
 
 ### Step 5.2: Create Main Hono App
 
 Create `/apps/api/src/index.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
@@ -2224,12 +2224,12 @@ export default {
   port,
   fetch: app.fetch,
 }
-```
+
 
 ### Step 5.3: Create Health Routes
 
 Create `/apps/api/src/routes/health.ts`:
-```typescript
+
 import { Hono } from 'hono'
 
 export const healthRoutes = new Hono()
@@ -2244,12 +2244,12 @@ healthRoutes.get('/', (c) => {
     },
   })
 })
-```
+
 
 ### Step 5.4: Create Auth Routes
 
 Create `/apps/api/src/routes/auth.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
@@ -2337,12 +2337,12 @@ authRoutes.get('/me', async (c) => {
     },
   })
 })
-```
+
 
 ### Step 5.5: Create Chat Routes
 
 Create `/apps/api/src/routes/chat.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { streamText } from 'ai'
 import { anthropic } from '@ai-sdk/anthropic'
@@ -2390,12 +2390,12 @@ chatRoutes.post('/regenerate', async (c) => {
     },
   })
 })
-```
+
 
 ### Step 5.6: Create Conversation Routes
 
 Create `/apps/api/src/routes/conversations.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
@@ -2505,12 +2505,12 @@ conversationRoutes.get('/:id/messages', async (c) => {
     },
   })
 })
-```
+
 
 ### Step 5.7: Create Memory Routes
 
 Create `/apps/api/src/routes/memory.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
@@ -2597,12 +2597,12 @@ memoryRoutes.delete('/:id', async (c) => {
   // TODO: Delete from Convex
   return c.json({ success: true })
 })
-```
+
 
 ### Step 5.8: Create Payment Routes
 
 Create `/apps/api/src/routes/payment.ts`:
-```typescript
+
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
@@ -2673,12 +2673,12 @@ paymentRoutes.post('/cancel', async (c) => {
     },
   })
 })
-```
+
 
 ### Step 5.9: Create Environment Example
 
 Create `/apps/api/.env.example`:
-```
+
 # Server
 PORT=3001
 NODE_ENV=development
@@ -2698,12 +2698,12 @@ GOOGLE_CLIENT_SECRET=
 # Polar.sh
 POLAR_API_KEY=
 POLAR_WEBHOOK_SECRET=
-```
+
 
 ### Step 5.10: Create Convex Schema
 
 Create `/apps/api/convex/schema.ts`:
-```typescript
+
 import { defineSchema, defineTable } from 'convex/server'
 import { v } from 'convex/values'
 
@@ -2793,7 +2793,7 @@ export default defineSchema({
     .index('by_user', ['userId'])
     .index('by_polar_id', ['polarSubscriptionId']),
 })
-```
+
 
 **Checkpoint**: Verify backend starts. Test endpoints. Output `BACKEND_DONE`
 
@@ -2921,9 +2921,9 @@ Before outputting completion signal, verify ALL of the following:
 
 When ALL phases complete and ALL verification checks pass:
 
-```
+
 <promise>YULA_PRODUCTION_MVP_COMPLETE</promise>
-```
+
 
 This signal indicates:
 - All 15 phases completed

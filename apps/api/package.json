@@ -1,0 +1,29 @@
+{
+  "name": "yula-api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist",
+    "start": "bun run dist/index.js",
+    "lint": "biome check src/",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.6.0",
+    "@hono/zod-validator": "^0.4.0",
+    "ai": "^4.0.0",
+    "@ai-sdk/anthropic": "^1.0.0",
+    "convex": "^1.17.0",
+    "zod": "^3.23.0",
+    "@repo/types": "workspace:*",
+    "@repo/auth": "workspace:*",
+    "@repo/ai": "workspace:*",
+    "@repo/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  }
+}
