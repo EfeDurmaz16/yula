@@ -15,5 +15,5 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
-      - run: bun run build --filter=@repo/api
+      - run: bunx turbo run build --filter=yula-api
       # Add your deployment step here (e.g., Railway, Fly.io, etc.)

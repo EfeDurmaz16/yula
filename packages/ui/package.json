@@ -40,6 +40,18 @@
     "./pricing-card": {
       "types": "./src/components/pricing-card.tsx",
       "import": "./src/components/pricing-card.tsx"
+    },
+    "./modal": {
+      "types": "./src/components/modal.tsx",
+      "import": "./src/components/modal.tsx"
+    },
+    "./textarea": {
+      "types": "./src/components/textarea.tsx",
+      "import": "./src/components/textarea.tsx"
+    },
+    "./toast": {
+      "types": "./src/components/toast.tsx",
+      "import": "./src/components/toast.tsx"
     }
   },
   "scripts": {

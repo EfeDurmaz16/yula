@@ -12,7 +12,10 @@
       "@repo/ui": ["../../packages/ui/src"],
       "@repo/types": ["../../packages/types/src"],
       "@repo/design-system": ["../../packages/design-system/src"],
-      "@repo/auth": ["../../packages/auth/src"]
+      "@repo/auth": ["../../packages/auth/src"],
+      "@repo/ai": ["../../packages/ai/src"],
+      "@repo/utils": ["../../packages/utils/src"],
+      "@repo/utils/*": ["../../packages/utils/src/*"]
     },
     "allowJs": true,
     "jsx": "preserve"
