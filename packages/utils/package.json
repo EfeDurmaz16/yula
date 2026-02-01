@@ -9,6 +9,10 @@
     "./validation": "./src/validation.ts",
     "./crypto": "./src/crypto.ts"
   },
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
   "dependencies": {
     "zod": "^3.23.0"
   }

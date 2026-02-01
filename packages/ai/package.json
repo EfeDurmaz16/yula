@@ -9,10 +9,15 @@
     "./tools": "./src/tools.ts",
     "./embeddings": "./src/embeddings.ts"
   },
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
   "dependencies": {
     "@repo/types": "workspace:*",
     "ai": "^4.0.0",
     "@ai-sdk/anthropic": "^1.0.0",
+    "openai": "^4.70.0",
     "zod": "^3.23.0"
   }
 }

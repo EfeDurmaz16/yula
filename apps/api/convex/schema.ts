@@ -7,6 +7,7 @@ export default defineSchema({
     name: v.string(),
     image: v.optional(v.string()),
     passwordHash: v.optional(v.string()),
+    emailVerified: v.optional(v.boolean()),
     tier: v.union(v.literal('free'), v.literal('pro'), v.literal('max'), v.literal('ultra')),
     billingCycle: v.union(v.literal('weekly'), v.literal('monthly'), v.literal('yearly')),
     polarCustomerId: v.optional(v.string()),
@@ -14,6 +15,37 @@ export default defineSchema({
   })
     .index('by_email', ['email'])
     .index('by_polar_id', ['polarCustomerId']),
+
+  sessions: defineTable({
+    userId: v.id('users'),
+    token: v.string(),
+    expiresAt: v.number(),
+    ipAddress: v.optional(v.string()),
+    userAgent: v.optional(v.string()),
+  })
+    .index('by_token', ['token'])
+    .index('by_user', ['userId']),
+
+  accounts: defineTable({
+    userId: v.id('users'),
+    accountId: v.string(),
+    providerId: v.string(),
+    accessToken: v.optional(v.string()),
+    refreshToken: v.optional(v.string()),
+    accessTokenExpiresAt: v.optional(v.number()),
+    refreshTokenExpiresAt: v.optional(v.number()),
+    scope: v.optional(v.string()),
+    idToken: v.optional(v.string()),
+    password: v.optional(v.string()),
+  })
+    .index('by_user', ['userId'])
+    .index('by_provider_account', ['providerId', 'accountId']),
+
+  verification: defineTable({
+    identifier: v.string(),
+    value: v.string(),
+    expiresAt: v.number(),
+  }).index('by_identifier', ['identifier']),
 
   conversations: defineTable({
     userId: v.id('users'),

@@ -16,4 +16,9 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bunx turbo run build --filter=yula-api
-      # Add your deployment step here (e.g., Railway, Fly.io, etc.)
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway
+        run: railway up --service yula-api
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

@@ -8,19 +8,22 @@
     "build": "bun build src/index.ts --outdir dist",
     "start": "bun run dist/index.js",
     "lint": "biome check src/",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "hono": "^4.6.0",
-    "@hono/zod-validator": "^0.4.0",
-    "ai": "^4.0.0",
     "@ai-sdk/anthropic": "^1.0.0",
-    "convex": "^1.17.0",
-    "zod": "^3.23.0",
-    "@repo/types": "workspace:*",
-    "@repo/auth": "workspace:*",
+    "@hono/zod-validator": "^0.4.0",
     "@repo/ai": "workspace:*",
-    "@repo/utils": "workspace:*"
+    "@repo/auth": "workspace:*",
+    "@repo/types": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "ai": "^4.0.0",
+    "better-auth": "^1.4.18",
+    "convex": "^1.17.0",
+    "hono": "^4.6.0",
+    "zod": "^3.23.0"
   },
   "devDependencies": {
     "@types/bun": "latest",

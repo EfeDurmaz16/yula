@@ -16,15 +16,22 @@
     "./server": {
       "types": "./src/server.ts",
       "import": "./src/server.ts"
+    },
+    "./convex-adapter": {
+      "types": "./src/convex-adapter.ts",
+      "import": "./src/convex-adapter.ts"
     }
   },
   "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "lint": "biome check src/",
     "format": "biome format --write src/"
   },
   "dependencies": {
     "@repo/types": "workspace:*",
-    "better-auth": "^1.2.0"
+    "better-auth": "^1.2.0",
+    "convex": "^1.17.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0"

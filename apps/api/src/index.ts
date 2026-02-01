@@ -3,6 +3,7 @@ import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { prettyJSON } from 'hono/pretty-json'
 
+import { authMiddleware } from './middleware/auth'
 import { authRoutes } from './routes/auth'
 import { chatRoutes } from './routes/chat'
 import { contextRoutes } from './routes/context'
@@ -25,13 +26,20 @@ app.use(
       'https://tauri.localhost',
     ],
     allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowHeaders: ['Content-Type', 'Authorization'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     credentials: true,
   }),
 )
 
 app.route('/health', healthRoutes)
 app.route('/api/auth', authRoutes)
+
+app.use('/api/chat/*', authMiddleware)
+app.use('/api/conversations/*', authMiddleware)
+app.use('/api/memory/*', authMiddleware)
+app.use('/api/context/*', authMiddleware)
+app.use('/api/payment/*', authMiddleware)
+
 app.route('/api/chat', chatRoutes)
 app.route('/api/conversations', conversationRoutes)
 app.route('/api/memory', memoryRoutes)

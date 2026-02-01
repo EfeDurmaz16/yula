@@ -1,8 +1,20 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "paths": {
+      "@repo/design-system": ["../../packages/design-system/src"],
+      "@repo/types": ["../../packages/types/src"],
+      "@repo/ui": ["../../packages/ui/src"],
+      "@repo/auth": ["../../packages/auth/src"],
+      "@repo/auth/*": ["../../packages/auth/src/*"],
+      "@repo/ai": ["../../packages/ai/src"],
+      "@repo/ai/*": ["../../packages/ai/src/*"],
+      "@repo/utils": ["../../packages/utils/src"],
+      "@repo/utils/*": ["../../packages/utils/src/*"],
+      "@repo/mcp-servers": ["../../packages/mcp-servers/src"]
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "convex/_generated/**/*"],
   "exclude": ["node_modules", "dist"]
 }
