@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --filter=!yula-desktop",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "lint:fix": "biome check --write .",
