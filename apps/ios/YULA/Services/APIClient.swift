@@ -9,10 +9,10 @@ enum APIClient {
         KeychainHelper.readString(for: "auth_token")
     }
 
-    static func request<T: Codable>(
+    static func request<T: Codable, B: Encodable>(
         path: String,
         method: String = "GET",
-        body: (any Encodable)? = nil
+        body: B?
     ) async throws -> APIResponse<T> {
         guard let url = URL(string: "\(baseURL)\(path)") else {
             throw URLError(.badURL)
@@ -32,6 +32,14 @@ enum APIClient {
 
         let (data, _) = try await URLSession.shared.data(for: request)
         return try JSONDecoder().decode(APIResponse<T>.self, from: data)
+    }
+
+    static func request<T: Codable>(
+        path: String,
+        method: String = "GET"
+    ) async throws -> APIResponse<T> {
+        let empty: String? = nil
+        return try await request(path: path, method: method, body: empty)
     }
 
     static func streamChat(conversationId: String, message: String) -> AsyncThrowingStream<String, Error> {
